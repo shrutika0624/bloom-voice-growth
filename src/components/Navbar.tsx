@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Heart, MessageCircle, Bot, Stethoscope, DollarSign, User, Settings } from "lucide-react";
-import { useLocation, Link } from "react-router-dom";
+import { Menu, Heart, MessageCircle, Bot, User, Stethoscope, DollarSign, Settings } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import echoLogo from "@/assets/echo-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,10 +26,10 @@ const Navbar = () => {
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-success animate-gentle-pulse"></div>
+          <img src={echoLogo} alt="Echo Logo" className="h-8 w-8" />
           <div>
             <h1 className="text-xl font-bold text-foreground">Echo</h1>
-            <p className="text-xs text-muted-foreground">Voices that Grow</p>
+            <p className="text-xs text-muted-foreground">Where Minds Bloom</p>
           </div>
         </Link>
 
@@ -77,10 +78,10 @@ const Navbar = () => {
           <SheetContent side="right" className="w-80">
             <div className="flex flex-col space-y-4 mt-8">
               <div className="flex items-center space-x-2 mb-4">
-                <div className="h-6 w-6 rounded-full bg-gradient-to-br from-primary to-success"></div>
+                <img src={echoLogo} alt="Echo Logo" className="h-6 w-6" />
                 <div>
                   <h2 className="font-semibold text-foreground">Echo</h2>
-                  <p className="text-xs text-muted-foreground">Voices that Grow</p>
+                  <p className="text-xs text-muted-foreground">Where Minds Bloom</p>
                 </div>
               </div>
               

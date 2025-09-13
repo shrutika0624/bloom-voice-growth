@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 import { 
   Heart, 
   MessageCircle, 
@@ -13,9 +14,10 @@ import {
   Gamepad2,
   Palette
 } from "lucide-react";
-import heroImage from "@/assets/hero-ocean-growth.jpg";
-import finnMascot from "@/assets/finn-dolphin-mascot.jpg";
-import growthStages from "@/assets/growth-stages.jpg";
+import heroImage from "@/assets/hero-ocean-scene.jpg";
+import finnMascot from "@/assets/finn-dolphin-mascot.png";
+import echoLogo from "@/assets/echo-logo.png";
+import bloomAvatars from "@/assets/bloom-avatars-sprout.png";
 
 const HomePage = () => {
   return (
@@ -24,10 +26,10 @@ const HomePage = () => {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-success"></div>
+            <img src={echoLogo} alt="Echo Logo" className="h-8 w-8" />
             <div>
               <h1 className="text-xl font-bold text-foreground">Echo</h1>
-              <p className="text-xs text-muted-foreground">Voices that Grow</p>
+              <p className="text-xs text-muted-foreground">Where Minds Bloom</p>
             </div>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
@@ -55,29 +57,38 @@ const HomePage = () => {
             Where Minds Bloom 🌱
           </Badge>
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
-            Join Your <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Safe Space</span>
+            Echo: Where <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Minds Bloom</span>
           </h2>
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            A nurturing platform where mental wellness grows through connection, support, and understanding. 
+          <p className="text-xl text-muted-foreground mb-4 max-w-2xl mx-auto font-medium">
+            Healing, Growth, and Connection
+          </p>
+          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
+            A nurturing platform where mental wellness grows through authentic connection, professional support, and meaningful community. 
             Start your journey of healing and growth today.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold">
-              <Heart className="mr-2 h-5 w-5" />
-              Join as User
-            </Button>
-            <Button size="lg" variant="secondary" className="px-8 py-6 text-lg font-semibold">
-              <Users className="mr-2 h-5 w-5" />
-              Continue as Guest
-            </Button>
+            <Link to="/login">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all">
+                <Heart className="mr-2 h-5 w-5" />
+                Join Your Safe Space
+              </Button>
+            </Link>
+            <Link to="/chats">
+              <Button size="lg" variant="secondary" className="px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all">
+                <Users className="mr-2 h-5 w-5" />
+                Continue as Guest
+              </Button>
+            </Link>
           </div>
 
-          <div className="mt-8">
-            <Button variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
-              <Stethoscope className="mr-2 h-4 w-4" />
-              Join as Expert
-            </Button>
+          <div className="mt-6">
+            <Link to="/login">
+              <Button variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground px-6 py-3 font-semibold">
+                <Stethoscope className="mr-2 h-4 w-4" />
+                Join as Expert
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -260,10 +271,13 @@ const HomePage = () => {
             </div>
             <div className="relative">
               <img 
-                src={growthStages} 
-                alt="Growth stages from seed to tree" 
-                className="rounded-2xl shadow-lg w-full h-auto"
+                src={bloomAvatars} 
+                alt="Bloom avatar growth stages" 
+                className="rounded-2xl shadow-lg w-full h-auto animate-float"
               />
+              <div className="absolute -bottom-4 -right-4 bg-gradient-to-br from-accent to-primary p-4 rounded-full shadow-xl">
+                <Sparkles className="h-6 w-6 text-white animate-gentle-pulse" />
+              </div>
             </div>
           </div>
         </div>
@@ -275,10 +289,10 @@ const HomePage = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="col-span-2">
               <div className="flex items-center space-x-2 mb-4">
-                <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-success"></div>
+                <img src={echoLogo} alt="Echo Logo" className="h-8 w-8" />
                 <div>
                   <h1 className="text-xl font-bold text-foreground">Echo</h1>
-                  <p className="text-xs text-muted-foreground">Voices that Grow</p>
+                  <p className="text-xs text-muted-foreground">Where Minds Bloom</p>
                 </div>
               </div>
               <p className="text-muted-foreground mb-6 max-w-md">

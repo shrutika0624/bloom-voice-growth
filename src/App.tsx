@@ -11,6 +11,7 @@ import ChatPage from "./pages/ChatPage";
 import FinnAI from "./pages/FinnAI";
 import ExpertsPage from "./pages/ExpertsPage";
 import CrowdfundingPage from "./pages/CrowdfundingPage";
+import BlogPage from "./pages/BlogPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="finn" element={<FinnAI />} />
             <Route path="experts" element={<ExpertsPage />} />
             <Route path="crowdfunding" element={<CrowdfundingPage />} />
+            <Route path="blog" element={<BlogPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

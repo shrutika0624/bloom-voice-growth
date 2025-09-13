@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
 import { 
   Palette, 
   Sparkles, 
@@ -15,34 +16,39 @@ import {
   MessageCircle,
   Users,
   Target,
-  Zap
+  Zap,
+  Leaf
 } from "lucide-react";
 import { toast } from "sonner";
+import bloomAvatars from "@/assets/bloom-avatars-sprout.png";
+import bloomTreeFlower from "@/assets/bloom-avatars-tree-flower.png";
 
 const Dashboard = () => {
   const [selectedAvatar, setSelectedAvatar] = useState("sprout");
   const [selectedColor, setSelectedColor] = useState("seafoam");
+  const [seedsBalance, setSeedsBalance] = useState(1247);
 
   const avatarTypes = [
-    { id: "sprout", name: "Young Sprout", emoji: "🌱", description: "Just beginning to grow" },
-    { id: "sapling", name: "Healthy Sapling", emoji: "🌿", description: "Growing stronger" },
-    { id: "bloom", name: "Blooming Tree", emoji: "🌳", description: "In full bloom" },
-    { id: "flower", name: "Flower Garden", emoji: "🌸", description: "Spreading beauty" },
+    { id: "sprout", name: "Young Sprout", emoji: "🌱", description: "Just beginning to grow", cost: 0 },
+    { id: "sapling", name: "Healthy Sapling", emoji: "🌿", description: "Growing stronger", cost: 150 },
+    { id: "bloom", name: "Blooming Tree", emoji: "🌳", description: "In full bloom", cost: 300 },
+    { id: "flower", name: "Flower Garden", emoji: "🌸", description: "Spreading beauty", cost: 500 },
   ];
 
   const colorPalettes = [
-    { id: "seafoam", name: "Ocean Breeze", colors: ["bg-primary", "bg-success", "bg-accent"] },
-    { id: "sunset", name: "Sunset Glow", colors: ["bg-warning", "bg-accent", "bg-destructive/70"] },
-    { id: "forest", name: "Forest Deep", colors: ["bg-success", "bg-primary", "bg-muted"] },
-    { id: "lavender", name: "Calm Lavender", colors: ["bg-secondary", "bg-primary/50", "bg-accent/50"] },
+    { id: "seafoam", name: "Ocean Breeze", colors: ["hsl(170, 35%, 45%)", "hsl(150, 40%, 55%)", "hsl(12, 85%, 70%)"], cost: 0 },
+    { id: "sunset", name: "Sunset Glow", colors: ["hsl(35, 80%, 65%)", "hsl(12, 85%, 70%)", "hsl(0, 70%, 60%)"], cost: 100 },
+    { id: "forest", name: "Forest Deep", colors: ["hsl(150, 40%, 55%)", "hsl(170, 35%, 45%)", "hsl(200, 25%, 20%)"], cost: 100 },
+    { id: "lavender", name: "Calm Lavender", colors: ["hsl(260, 60%, 75%)", "hsl(170, 35%, 45%)", "hsl(12, 85%, 70%)"], cost: 150 },
   ];
 
   const achievements = [
-    { name: "First Steps", description: "Joined Echo community", completed: true, icon: "🌱" },
-    { name: "Conversation Starter", description: "Sent your first message", completed: true, icon: "💬" },
-    { name: "FINN's Friend", description: "Played with FINN", completed: false, icon: "🐬" },
-    { name: "Helper", description: "Supported a community member", completed: false, icon: "🤝" },
-    { name: "Growth Mindset", description: "7 days of active engagement", completed: false, icon: "📈" },
+    { name: "First Sprout", description: "Joined Echo: Where Minds Bloom", completed: true, icon: "🌱", seeds: 50 },
+    { name: "Conversation Starter", description: "Sent your first message", completed: true, icon: "💬", seeds: 25 },
+    { name: "FINN's Friend", description: "Played with FINN the dolphin", completed: true, icon: "🐬", seeds: 75 },
+    { name: "Helper", description: "Supported a community member", completed: false, icon: "🤝", seeds: 100 },
+    { name: "Growth Mindset", description: "7 days of active engagement", completed: false, icon: "📈", seeds: 200 },
+    { name: "Bloom Master", description: "Unlocked all avatar styles", completed: false, icon: "🏆", seeds: 500 },
   ];
 
   const handleAvatarChange = (avatarId: string) => {
@@ -58,32 +64,36 @@ const Dashboard = () => {
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
       {/* Welcome Header */}
-      <div className="text-center space-y-4">
-        <div className="flex justify-center">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div className="flex items-center space-x-4">
           <div className="relative">
-            <Avatar className="h-24 w-24 border-4 border-primary/20">
-              <AvatarFallback className="bg-gradient-to-br from-primary to-success text-2xl">
-                {avatarTypes.find(a => a.id === selectedAvatar)?.emoji}
-              </AvatarFallback>
-            </Avatar>
-            <div className="absolute -bottom-2 -right-2 h-8 w-8 bg-success rounded-full flex items-center justify-center text-white text-sm font-bold animate-gentle-pulse">
-              12
+            <img 
+              src={bloomAvatars} 
+              alt="Your Bloom Avatar" 
+              className="w-20 h-20 rounded-full border-4 border-primary/20 shadow-lg object-cover"
+            />
+            <Badge className="absolute -top-2 -right-2 bg-accent text-accent-foreground">
+              Level 12
+            </Badge>
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold text-foreground">Welcome to Your Oasis</h1>
+            <p className="text-muted-foreground">Your personal space where minds bloom and grow</p>
+            <div className="flex gap-2 mt-2">
+              <Badge className="bg-success/10 text-success border-success/20">
+                🔥 7 Day Streak
+              </Badge>
+              <Badge className="bg-primary/10 text-primary border-primary/20">
+                Growing Strong
+              </Badge>
             </div>
           </div>
         </div>
-        <div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">Welcome to Your Oasis</h1>
-          <p className="text-muted-foreground">Your personal space for growth and reflection</p>
-          <div className="flex justify-center gap-2 mt-4">
-            <Badge className="bg-success/10 text-success border-success/20">
-              🌱 256 Seeds
-            </Badge>
-            <Badge className="bg-primary/10 text-primary border-primary/20">
-              Level 12
-            </Badge>
-            <Badge className="bg-accent/10 text-accent border-accent/20">
-              🔥 7 Day Streak
-            </Badge>
+        <div className="flex items-center space-x-3 bg-gradient-to-r from-success/10 to-primary/10 p-4 rounded-lg border border-success/20">
+          <Leaf className="h-6 w-6 text-success animate-gentle-pulse" />
+          <div>
+            <div className="text-2xl font-bold text-success">{seedsBalance.toLocaleString()}</div>
+            <div className="text-sm text-muted-foreground">Seeds Balance</div>
           </div>
         </div>
       </div>
