@@ -56,8 +56,25 @@ const HomePage = () => {
           <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">
             Where Minds Bloom 🌱
           </Badge>
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
-            Echo: Where <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Minds Bloom</span>
+          
+          {/* Live Community Stats */}
+          <div className="flex flex-wrap justify-center items-center gap-6 mb-8 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 bg-success rounded-full animate-pulse"></div>
+              <span>🌱 1,245 seeds grown</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <MessageCircle className="h-4 w-4" />
+              <span>💬 5,320 messages shared</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              <span>👥 312 active users</span>
+            </div>
+          </div>
+
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-foreground animate-fade-in">
+            Echo: Where <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent animate-gentle-pulse">Minds Bloom</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-4 max-w-2xl mx-auto font-medium">
             Healing, Growth, and Connection

@@ -89,18 +89,55 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center space-x-3 bg-gradient-to-r from-success/10 to-primary/10 p-4 rounded-lg border border-success/20">
-          <Leaf className="h-6 w-6 text-success animate-gentle-pulse" />
-          <div>
-            <div className="text-2xl font-bold text-success">{seedsBalance.toLocaleString()}</div>
-            <div className="text-sm text-muted-foreground">Seeds Balance</div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <div className="bg-gradient-to-r from-success/10 to-primary/10 p-3 rounded-lg border border-success/20 text-center">
+            <Leaf className="h-5 w-5 text-success mx-auto animate-gentle-pulse" />
+            <div className="text-xl font-bold text-success">{seedsBalance.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground">Seeds</div>
+          </div>
+          <div className="bg-gradient-to-r from-accent/10 to-warning/10 p-3 rounded-lg border border-accent/20 text-center">
+            <div className="text-lg">🔥</div>
+            <div className="text-xl font-bold text-foreground">7</div>
+            <div className="text-xs text-muted-foreground">Day Streak</div>
+          </div>
+          <div className="bg-gradient-to-r from-primary/10 to-accent/10 p-3 rounded-lg border border-primary/20 text-center">
+            <MessageCircle className="h-5 w-5 text-primary mx-auto" />
+            <div className="text-xl font-bold text-foreground">325</div>
+            <div className="text-xs text-muted-foreground">Messages</div>
+          </div>
+          <div className="bg-gradient-to-r from-secondary/10 to-muted/10 p-3 rounded-lg border border-secondary/20 text-center">
+            <Users className="h-5 w-5 text-secondary-foreground mx-auto" />
+            <div className="text-xl font-bold text-foreground">20</div>
+            <div className="text-xs text-muted-foreground">Friends</div>
           </div>
         </div>
       </div>
 
-      {/* Stats Cards */}
+      {/* Progress Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Target className="h-5 w-5 text-success" />
+            Progress to Next Badge
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm font-medium">Helper Badge</span>
+              <span className="text-sm text-muted-foreground">3 / 5 support actions</span>
+            </div>
+            <Progress value={60} className="h-2" />
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Help 2 more community members to unlock your Helper badge and earn 100 Seeds! 🤝
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Enhanced Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="hover:shadow-lg transition-all duration-300 group">
+        <Card className="hover:shadow-lg transition-all duration-300 group border-primary/20">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <CardTitle className="text-sm font-medium text-muted-foreground">Messages Sent</CardTitle>
@@ -108,58 +145,58 @@ const Dashboard = () => {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-foreground">147</div>
+            <div className="text-2xl font-bold text-foreground">325</div>
             <div className="flex items-center text-xs text-success mt-1">
               <TrendingUp className="h-3 w-3 mr-1" />
-              +23 this week
+              +47 this week
             </div>
           </CardContent>
         </Card>
 
-        <Card className="hover:shadow-lg transition-all duration-300 group">
+        <Card className="hover:shadow-lg transition-all duration-300 group border-accent/20">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Friends Made</CardTitle>
-              <Users className="h-4 w-4 text-accent group-hover:scale-110 transition-transform" />
+              <CardTitle className="text-sm font-medium text-muted-foreground">Message Streak</CardTitle>
+              <div className="text-lg">🔥</div>
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-foreground">23</div>
+            <div className="text-2xl font-bold text-foreground">7 Days</div>
             <div className="flex items-center text-xs text-success mt-1">
-              <Heart className="h-3 w-3 mr-1" />
-              Growing network
+              <Calendar className="h-3 w-3 mr-1" />
+              Keep it going!
             </div>
           </CardContent>
         </Card>
 
-        <Card className="hover:shadow-lg transition-all duration-300 group">
+        <Card className="hover:shadow-lg transition-all duration-300 group border-success/20">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-medium text-muted-foreground">FINN Interactions</CardTitle>
-              <Zap className="h-4 w-4 text-warning group-hover:scale-110 transition-transform" />
+              <CardTitle className="text-sm font-medium text-muted-foreground">Badges Earned</CardTitle>
+              <Trophy className="h-4 w-4 text-warning group-hover:scale-110 transition-transform" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-foreground">89</div>
+            <div className="text-2xl font-bold text-foreground">3</div>
             <div className="flex items-center text-xs text-success mt-1">
               <Sparkles className="h-3 w-3 mr-1" />
-              AI friendship
+              2 more to unlock
             </div>
           </CardContent>
         </Card>
 
-        <Card className="hover:shadow-lg transition-all duration-300 group">
+        <Card className="hover:shadow-lg transition-all duration-300 group border-warning/20">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Growth Score</CardTitle>
-              <Target className="h-4 w-4 text-success group-hover:scale-110 transition-transform" />
+              <CardTitle className="text-sm font-medium text-muted-foreground">FINN Friendship</CardTitle>
+              <div className="text-lg">🐬</div>
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-foreground">8.7</div>
+            <div className="text-2xl font-bold text-foreground">Level 5</div>
             <div className="flex items-center text-xs text-success mt-1">
-              <TrendingUp className="h-3 w-3 mr-1" />
-              Excellent progress
+              <Heart className="h-3 w-3 mr-1" />
+              89 interactions
             </div>
           </CardContent>
         </Card>

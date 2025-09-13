@@ -214,13 +214,38 @@ const FinnAI = () => {
 
           {/* Chat Tab */}
           <TabsContent value="chat" className="space-y-6">
+            {/* FINN Suggestion Cards */}
+            <div className="grid md:grid-cols-3 gap-4">
+              <Card className="hover:shadow-lg transition-all cursor-pointer group border-primary/20">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl mb-2">💡</div>
+                  <h4 className="font-semibold text-sm mb-1">Start a Stream</h4>
+                  <p className="text-xs text-muted-foreground">Create a group chat about positivity</p>
+                </CardContent>
+              </Card>
+              <Card className="hover:shadow-lg transition-all cursor-pointer group border-success/20">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl mb-2">🔒</div>
+                  <h4 className="font-semibold text-sm mb-1">Move to Haven</h4>
+                  <p className="text-xs text-muted-foreground">Continue this conversation privately</p>
+                </CardContent>
+              </Card>
+              <Card className="hover:shadow-lg transition-all cursor-pointer group border-accent/20">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl mb-2">🎮</div>
+                  <h4 className="font-semibold text-sm mb-1">Play Mini-Game</h4>
+                  <p className="text-xs text-muted-foreground">Try Bubble Drifter to earn Seeds</p>
+                </CardContent>
+              </Card>
+            </div>
+
             <Card className="h-[500px] flex flex-col">
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2">
                   <Bot className="h-5 w-5 text-primary" />
                   Chat with FINN
                   <Badge className="bg-primary/10 text-primary border-primary/20">
-                    AI Powered
+                    🐬 AI Powered
                   </Badge>
                 </CardTitle>
               </CardHeader>
@@ -313,12 +338,12 @@ const FinnAI = () => {
                             Currently Wearing
                           </Badge>
                         ) : (
-                          <Button 
+                        <Button 
                             onClick={() => buyOutfit(outfit)}
-                            className={outfit.cost === 0 ? "bg-muted hover:bg-muted/80" : ""}
+                            className={outfit.cost === 0 ? "bg-muted hover:bg-muted/80" : outfit.cost > seeds ? "opacity-50" : ""}
                             disabled={outfit.cost > 0 && seeds < outfit.cost}
                           >
-                            {outfit.cost === 0 ? "Free" : `${outfit.cost} Seeds`}
+                            {outfit.cost === 0 ? "Free ✨" : outfit.cost > seeds ? `Need ${outfit.cost - seeds} more 🌱` : `${outfit.cost} Seeds 🌱`}
                           </Button>
                         )}
                       </CardContent>
@@ -390,13 +415,14 @@ const FinnAI = () => {
                   <div className="h-64 bg-gradient-to-b from-indigo-900/20 to-purple-900/20 rounded-lg border flex items-center justify-center">
                     <div className="text-center space-y-4">
                       <div className="text-6xl animate-gentle-pulse">⭐</div>
-                      <p className="text-sm text-muted-foreground">Multiplayer game</p>
-                      <p className="text-xs text-muted-foreground">Coming soon!</p>
+                      <p className="text-sm text-muted-foreground">Multiplayer breathing exercise</p>
+                      <Badge className="bg-warning/10 text-warning border-warning/20">Coming Soon</Badge>
+                      <p className="text-xs text-muted-foreground">Connect with friends for guided meditation</p>
                     </div>
                   </div>
                   <Button disabled className="w-full">
                     <Users className="h-4 w-4 mr-2" />
-                    Find Players
+                    Find Meditation Partners
                   </Button>
                 </CardContent>
               </Card>

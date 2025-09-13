@@ -164,8 +164,21 @@ const ChatPage = () => {
           </span>
           {message.type === "finn" && (
             <Badge className="bg-primary/10 text-primary border-primary/20 text-xs">
-              AI Assistant
+              🐬 AI Assistant
             </Badge>
+          )}
+          {message.user === "You" && (
+            <Badge className="bg-success/10 text-success border-success/20 text-xs">
+              ✅ Guest
+            </Badge>
+          )}
+          {message.user !== "You" && message.type !== "finn" && (
+            <div className="flex items-center gap-1">
+              <Badge className="bg-muted/50 text-muted-foreground border-muted text-xs">
+                ✅ Guest
+              </Badge>
+              <div className="text-xs">🔥</div>
+            </div>
           )}
           <span className="text-xs text-muted-foreground">{message.timestamp}</span>
         </div>
@@ -294,7 +307,13 @@ const ChatPage = () => {
                     </Button>
                   </div>
                   <div className="flex items-center justify-between mt-2 text-xs text-muted-foreground">
-                    <span>FINN is monitoring for safety 🐬</span>
+                    <div className="flex items-center gap-2">
+                      <span>FINN is monitoring for safety 🐬</span>
+                      <div className="flex items-center gap-1">
+                        <div className="text-xs">🔥</div>
+                        <span>7-day streak active!</span>
+                      </div>
+                    </div>
                     <span>Press Enter to send</span>
                   </div>
                 </div>
@@ -338,11 +357,16 @@ const ChatPage = () => {
 
               <TabsContent value="haven" className="flex-1 flex flex-col m-0 p-4">
                 <div className="text-center py-12 space-y-4">
-                  <Shield className="h-12 w-12 text-success mx-auto" />
+                  <div className="relative">
+                    <Shield className="h-12 w-12 text-success mx-auto" />
+                    <div className="absolute -top-1 -right-1 bg-success rounded-full p-1">
+                      <div className="text-xs">🔒</div>
+                    </div>
+                  </div>
                   <div>
-                    <h3 className="font-semibold text-foreground mb-2">Private Haven</h3>
+                    <h3 className="font-semibold text-foreground mb-2">Private Haven 🔒</h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Encrypted, one-on-one conversations for deeper support
+                      End-to-end encrypted, one-on-one conversations for deeper support
                     </p>
                   </div>
                   <div className="grid gap-3 max-w-md mx-auto">
