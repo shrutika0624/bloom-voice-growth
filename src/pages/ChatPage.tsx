@@ -219,8 +219,15 @@ const ChatPage = () => {
         {/* Chat Interface */}
         <Card className="h-[600px] flex flex-col">
           <CardHeader className="pb-3">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
+            <div className="text-center space-y-2 mb-4">
+              <h2 className="text-xl font-semibold text-foreground">Choose Your Space</h2>
+              <p className="text-sm text-muted-foreground">Safe conversations for every comfort level</p>
+            </div>
+          </CardHeader>
+
+          <CardContent className="flex-1 flex flex-col p-0">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex flex-col h-full">
+              <TabsList className="grid w-full grid-cols-3 mx-4 mb-4">
                 <TabsTrigger value="world" className="flex items-center gap-2">
                   <Globe className="h-4 w-4" />
                   World Chat
@@ -237,130 +244,128 @@ const ChatPage = () => {
                   <Badge className="ml-1 bg-success/10 text-success">Private</Badge>
                 </TabsTrigger>
               </TabsList>
-            </Tabs>
-          </CardHeader>
 
-          <CardContent className="flex-1 flex flex-col p-0">
-            <TabsContent value="world" className="flex-1 flex flex-col m-0 p-4">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 bg-success rounded-full animate-pulse"></div>
-                  <span className="text-sm text-muted-foreground">147 members online</span>
-                </div>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm">
-                    <UserPlus className="h-4 w-4 mr-1" />
-                    Invite
-                  </Button>
-                  <Button variant="outline" size="sm">
-                    <MoreHorizontal className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-
-              <ScrollArea className="flex-1 pr-4">
-                <div className="space-y-2">
-                  {messages.map(renderMessage)}
-                  <div ref={messagesEndRef} />
-                </div>
-              </ScrollArea>
-
-              {/* Message Input */}
-              <div className="border-t pt-4 mt-4">
-                <div className="flex gap-2 items-end">
-                  <div className="flex-1 relative">
-                    <Input
-                      placeholder="Share something positive... 🌱"
-                      value={currentMessage}
-                      onChange={(e) => setCurrentMessage(e.target.value)}
-                      onKeyPress={handleKeyPress}
-                      className="pr-12 min-h-[44px] resize-none"
-                    />
-                    <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-1">
-                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                        <Smile className="h-4 w-4" />
-                      </Button>
-                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                        <Image className="h-4 w-4" />
-                      </Button>
-                    </div>
+              <TabsContent value="world" className="flex-1 flex flex-col m-0 p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="h-2 w-2 bg-success rounded-full animate-pulse"></div>
+                    <span className="text-sm text-muted-foreground">147 members online</span>
                   </div>
-                  <Button onClick={sendMessage} className="h-11">
-                    <Send className="h-4 w-4" />
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm">
+                      <UserPlus className="h-4 w-4 mr-1" />
+                      Invite
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+
+                <ScrollArea className="flex-1 pr-4">
+                  <div className="space-y-2">
+                    {messages.map(renderMessage)}
+                    <div ref={messagesEndRef} />
+                  </div>
+                </ScrollArea>
+
+                {/* Message Input */}
+                <div className="border-t pt-4 mt-4">
+                  <div className="flex gap-2 items-end">
+                    <div className="flex-1 relative">
+                      <Input
+                        placeholder="Share something positive... 🌱"
+                        value={currentMessage}
+                        onChange={(e) => setCurrentMessage(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                        className="pr-12 min-h-[44px] resize-none"
+                      />
+                      <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-1">
+                        <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                          <Smile className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                          <Image className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    <Button onClick={sendMessage} className="h-11">
+                      <Send className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  <div className="flex items-center justify-between mt-2 text-xs text-muted-foreground">
+                    <span>FINN is monitoring for safety 🐬</span>
+                    <span>Press Enter to send</span>
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="streams" className="flex-1 flex flex-col m-0 p-4">
+                <div className="text-center py-12 space-y-4">
+                  <Users className="h-12 w-12 text-muted-foreground mx-auto" />
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-2">Join a Stream</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Connect with focused groups around specific topics
+                    </p>
+                  </div>
+                  <div className="grid gap-3 max-w-md mx-auto">
+                    {[
+                      { name: "Anxiety Support", members: 23, topic: "Coping strategies" },
+                      { name: "Mindfulness Circle", members: 15, topic: "Daily practices" },
+                      { name: "Student Wellness", members: 31, topic: "Academic stress" },
+                      { name: "Creative Healing", members: 12, topic: "Art therapy" }
+                    ].map((stream, idx) => (
+                      <Card key={idx} className="p-3 hover:shadow-md transition-shadow cursor-pointer">
+                        <div className="flex items-center justify-between">
+                          <div className="text-left">
+                            <h4 className="font-medium text-sm text-foreground">{stream.name}</h4>
+                            <p className="text-xs text-muted-foreground">{stream.topic}</p>
+                          </div>
+                          <Badge variant="outline" className="text-xs">
+                            {stream.members} active
+                          </Badge>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                  <Button className="mt-4">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Create New Stream
                   </Button>
                 </div>
-                <div className="flex items-center justify-between mt-2 text-xs text-muted-foreground">
-                  <span>FINN is monitoring for safety 🐬</span>
-                  <span>Press Enter to send</span>
-                </div>
-              </div>
-            </TabsContent>
+              </TabsContent>
 
-            <TabsContent value="streams" className="flex-1 flex flex-col m-0 p-4">
-              <div className="text-center py-12 space-y-4">
-                <Users className="h-12 w-12 text-muted-foreground mx-auto" />
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">Join a Stream</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Connect with focused groups around specific topics
-                  </p>
-                </div>
-                <div className="grid gap-3 max-w-md mx-auto">
-                  {[
-                    { name: "Anxiety Support", members: 23, topic: "Coping strategies" },
-                    { name: "Mindfulness Circle", members: 15, topic: "Daily practices" },
-                    { name: "Student Wellness", members: 31, topic: "Academic stress" },
-                    { name: "Creative Healing", members: 12, topic: "Art therapy" }
-                  ].map((stream, idx) => (
-                    <Card key={idx} className="p-3 hover:shadow-md transition-shadow cursor-pointer">
-                      <div className="flex items-center justify-between">
-                        <div className="text-left">
-                          <h4 className="font-medium text-sm text-foreground">{stream.name}</h4>
-                          <p className="text-xs text-muted-foreground">{stream.topic}</p>
-                        </div>
-                        <Badge variant="outline" className="text-xs">
-                          {stream.members} active
-                        </Badge>
+              <TabsContent value="haven" className="flex-1 flex flex-col m-0 p-4">
+                <div className="text-center py-12 space-y-4">
+                  <Shield className="h-12 w-12 text-success mx-auto" />
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-2">Private Haven</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Encrypted, one-on-one conversations for deeper support
+                    </p>
+                  </div>
+                  <div className="grid gap-3 max-w-md mx-auto">
+                    <Card className="p-4 border-success/20">
+                      <div className="text-center space-y-2">
+                        <Avatar className="h-8 w-8 mx-auto">
+                          <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white">
+                            🐬
+                          </AvatarFallback>
+                        </Avatar>
+                        <h4 className="font-medium text-sm text-foreground">FINN AI Assistant</h4>
+                        <p className="text-xs text-muted-foreground">Available 24/7 for support</p>
+                        <Button size="sm" variant="outline">Start Private Chat</Button>
                       </div>
                     </Card>
-                  ))}
-                </div>
-                <Button className="mt-4">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Create New Stream
-                </Button>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="haven" className="flex-1 flex flex-col m-0 p-4">
-              <div className="text-center py-12 space-y-4">
-                <Shield className="h-12 w-12 text-success mx-auto" />
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">Private Haven</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Encrypted, one-on-one conversations for deeper support
+                  </div>
+                  <p className="text-xs text-muted-foreground max-w-sm mx-auto">
+                    Haven chats are end-to-end encrypted and completely private. 
+                    Only you and your conversation partner can see the messages.
                   </p>
                 </div>
-                <div className="grid gap-3 max-w-md mx-auto">
-                  <Card className="p-4 border-success/20">
-                    <div className="text-center space-y-2">
-                      <Avatar className="h-8 w-8 mx-auto">
-                        <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white">
-                          🐬
-                        </AvatarFallback>
-                      </Avatar>
-                      <h4 className="font-medium text-sm text-foreground">FINN AI Assistant</h4>
-                      <p className="text-xs text-muted-foreground">Available 24/7 for support</p>
-                      <Button size="sm" variant="outline">Start Private Chat</Button>
-                    </div>
-                  </Card>
-                </div>
-                <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-                  Haven chats are end-to-end encrypted and completely private. 
-                  Only you and your conversation partner can see the messages.
-                </p>
-              </div>
-            </TabsContent>
+              </TabsContent>
+            </Tabs>
           </CardContent>
         </Card>
       </div>
