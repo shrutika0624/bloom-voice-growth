@@ -20,8 +20,14 @@ import {
   Leaf
 } from "lucide-react";
 import { toast } from "sonner";
-import bloomAvatars from "@/assets/bloom-avatars-sprout.png";
+import bloomSprout from "@/assets/bloom-avatars-sprout.png";
 import bloomTreeFlower from "@/assets/bloom-avatars-tree-flower.png";
+import bloomSeedCoral from "@/assets/bloom-avatars-seed-coral.png";
+import bloomSaplingTeal from "@/assets/bloom-avatars-sapling-teal.png";
+import bloomBudLavender from "@/assets/bloom-avatars-bud-lavender.png";
+import bloomGolden from "@/assets/bloom-avatars-bloom-golden.png";
+import bloomMatureSage from "@/assets/bloom-avatars-mature-sage.png";
+import bloomMysticalMint from "@/assets/bloom-avatars-mystical-mint.png";
 
 const Dashboard = () => {
   const [selectedAvatar, setSelectedAvatar] = useState("sprout");
@@ -29,10 +35,14 @@ const Dashboard = () => {
   const [seedsBalance, setSeedsBalance] = useState(1247);
 
   const avatarTypes = [
-    { id: "sprout", name: "Young Sprout", emoji: "🌱", description: "Just beginning to grow", cost: 0 },
-    { id: "sapling", name: "Healthy Sapling", emoji: "🌿", description: "Growing stronger", cost: 150 },
-    { id: "bloom", name: "Blooming Tree", emoji: "🌳", description: "In full bloom", cost: 300 },
-    { id: "flower", name: "Flower Garden", emoji: "🌸", description: "Spreading beauty", cost: 500 },
+    { id: "seed", name: "Baby Seed", emoji: "🌰", description: "Just starting your journey", cost: 0, image: bloomSeedCoral },
+    { id: "sprout", name: "Young Sprout", emoji: "🌱", description: "Beginning to grow", cost: 0, image: bloomSprout },
+    { id: "sapling", name: "Healthy Sapling", emoji: "🌿", description: "Growing stronger", cost: 150, image: bloomSaplingTeal },
+    { id: "bud", name: "Beautiful Bud", emoji: "🌺", description: "About to bloom", cost: 200, image: bloomBudLavender },
+    { id: "bloom", name: "Golden Bloom", emoji: "🌻", description: "In full bloom", cost: 300, image: bloomGolden },
+    { id: "mature", name: "Mature Garden", emoji: "🌳", description: "Flourishing with wisdom", cost: 500, image: bloomMatureSage },
+    { id: "mystical", name: "Mystical Plant", emoji: "✨", description: "Magical and inspiring", cost: 750, image: bloomMysticalMint },
+    { id: "flower", name: "Flower Tree", emoji: "🌸", description: "Spreading beauty everywhere", cost: 1000, image: bloomTreeFlower },
   ];
 
   const colorPalettes = [
@@ -52,8 +62,22 @@ const Dashboard = () => {
   ];
 
   const handleAvatarChange = (avatarId: string) => {
+    const avatar = avatarTypes.find(a => a.id === avatarId);
+    if (!avatar) return;
+    
+    if (avatar.cost > 0 && seedsBalance < avatar.cost) {
+      toast.error(`You need ${avatar.cost - seedsBalance} more Seeds to unlock this avatar! 💰`);
+      return;
+    }
+    
+    if (avatar.cost > 0) {
+      setSeedsBalance(prev => prev - avatar.cost);
+      toast.success(`🎉 Avatar unlocked and equipped! ${avatar.name} suits you perfectly! (-${avatar.cost} Seeds)`);
+    } else {
+      toast.success("Avatar updated! Your bloom is looking great! 🌟");
+    }
+    
     setSelectedAvatar(avatarId);
-    toast.success("Avatar updated! Your bloom is looking great! 🌟");
   };
 
   const handleColorChange = (colorId: string) => {
@@ -68,9 +92,9 @@ const Dashboard = () => {
         <div className="flex items-center space-x-4">
           <div className="relative">
             <img 
-              src={bloomAvatars} 
+              src={avatarTypes.find(a => a.id === selectedAvatar)?.image || bloomSprout} 
               alt="Your Bloom Avatar" 
-              className="w-20 h-20 rounded-full border-4 border-primary/20 shadow-lg object-cover"
+              className="w-20 h-20 rounded-full border-4 border-primary/20 shadow-lg object-cover bg-white p-2 animate-glow hover:scale-110 transition-all duration-300"
             />
             <Badge className="absolute -top-2 -right-2 bg-accent text-accent-foreground">
               Level 12
@@ -229,24 +253,46 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Avatar Selection */}
-              <div>
+                <div>
                 <h3 className="font-semibold mb-4 text-foreground">Choose Your Growth Stage</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {avatarTypes.map((avatar) => (
-                    <Card 
-                      key={avatar.id}
-                      className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
-                        selectedAvatar === avatar.id ? "ring-2 ring-primary bg-primary/5" : ""
-                      }`}
-                      onClick={() => handleAvatarChange(avatar.id)}
-                    >
-                      <CardContent className="p-4 text-center">
-                        <div className="text-3xl mb-2">{avatar.emoji}</div>
-                        <h4 className="font-medium text-sm text-foreground">{avatar.name}</h4>
-                        <p className="text-xs text-muted-foreground mt-1">{avatar.description}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
+                  {avatarTypes.map((avatar) => {
+                    const canAfford = seedsBalance >= avatar.cost;
+                    const isUnlocked = avatar.cost === 0 || canAfford;
+                    
+                    return (
+                      <Card 
+                        key={avatar.id}
+                        className={`cursor-pointer transition-all duration-300 hover:shadow-lg relative ${
+                          selectedAvatar === avatar.id ? "ring-2 ring-primary bg-primary/5" : ""
+                        } ${!isUnlocked ? "opacity-50" : ""}`}
+                        onClick={() => isUnlocked && handleAvatarChange(avatar.id)}
+                      >
+                        <CardContent className="p-4 text-center">
+                          <div className="relative">
+                            <img 
+                              src={avatar.image} 
+                              alt={avatar.name}
+                              className="w-16 h-16 mx-auto mb-2 rounded-full object-cover bg-white p-2"
+                            />
+                            {!isUnlocked && (
+                              <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded-full">
+                                <span className="text-2xl">🔒</span>
+                              </div>
+                            )}
+                          </div>
+                          <h4 className="font-medium text-sm text-foreground">{avatar.name}</h4>
+                          <p className="text-xs text-muted-foreground mt-1">{avatar.description}</p>
+                          {avatar.cost > 0 && (
+                            <div className={`text-xs mt-2 flex items-center justify-center gap-1 ${canAfford ? "text-success" : "text-warning"}`}>
+                              <Leaf className="h-3 w-3" />
+                              {avatar.cost} Seeds
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
               </div>
 
